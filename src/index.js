@@ -29,12 +29,25 @@ function routeByHosts(host) {
   }
   return "";
 }
+import DOCS from './help.html'
 
 async function handleRequest(request) {
   const url = new URL(request.url);
-  if (url.pathname == "/") {
-    return Response.redirect(url.protocol + "//" + url.host + "/v2/", 301);
+  // if (url.pathname == "/") {
+  //   return Response.redirect(url.protocol + "//" + url.host + "/v2/", 301);
+  // }
+
+  // return docs
+  if (url.pathname === "/") {
+    return new Response(DOCS, {
+      status: 200,
+      headers: {
+        "content-type": "text/html"
+      }
+    });
   }
+
+
   const upstream = routeByHosts(url.hostname);
   if (upstream === "") {
     return new Response(
