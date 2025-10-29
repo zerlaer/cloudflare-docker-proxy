@@ -100,22 +100,18 @@
     <div class="container">
       <div class="content">
         <p>为了加速 Docker 镜像拉取，你可以使用以下命令设置 registry mirror:</p>
-        <pre><code id="registry-config">
-            sudo mkdir -p /etc/docker
+        <pre><code id="registry-config">sudo mkdir -p /etc/docker
             sudo tee /etc/docker/daemon.json &lt;&lt;EOF
 {
     "registry-mirrors": ["https://{{host}}"]
 }
-EOF
-        </code></pre>
+EOF </code></pre>
         <p>配置完后需要重启 Docker 服务</p>
-        <pre><code id="restart-restart">
-            sudo systemctl daemon-reload
+<pre><code id="restart-restart">sudo systemctl daemon-reload
             sudo systemctl restart docker
 </code></pre>
         <p>使用该代理从不同的镜像仓库拉取镜像，请参考以下命令：</p>
-        <pre><code id="commands">
-# docker pull nginx:latest
+        <pre><code id="commands"># docker pull nginx:latest
 docker pull docker.{{host}}/library/nginx:latest  # 拉取 Docker 官方镜像
 
 # docker pull quay.io/coreos/etcd:latest
